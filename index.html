@@ -258,7 +258,8 @@
                 filename: 'despesas.pdf',
                 image: { type: 'jpeg', quality: 1 },
                 html2canvas: { scale: 3 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                pagebreak: { mode: 'avoid-all' } // Evita quebras de página
             };
 
             if (selectedOption === 'Alta') {
@@ -275,6 +276,7 @@
         }
     });
 </script>
+
 <script src="main.js"></script>
 </body>
 </html>
