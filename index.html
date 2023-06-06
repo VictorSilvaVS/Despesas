@@ -1,198 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/exchange-rates-api@4.1.0/dist/exchange-rates-api.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="ico.ico" type="image/x-icon">
     <meta property="og:title" content="Gerenciador de despesas">
     <meta property="og:description" content="Analise suas despesas">
     <meta property="og:image" content="https://www.etecjk.com/wp-content/uploads/2013/08/gnucash-icon-256x256.png">
-    <meta property="og:url" content="">
-    <title>Despesas - Gráfico de Pizza</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
+    <meta property="og:url" content="">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dark.css">
+    <title>Despesas - Gráfico de Pizza</title>
 
-        h1, h2 {
-            color: #333;
-            text-align: center;
-        }
 
-        #content {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            height: auto;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="number"],
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            resize: vertical;
-        }
-
-        button {
-            display: block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        #chart-section {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .exceeds-salary {
-            color: rgb(255, 0, 0);
-        }
-
-        .within-budget {
-            color: green;
-        }
-
-        .tips-section {
-            display: none;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .tips-section h3 {
-            margin-top: 0;
-            color: #333;
-        }
-
-        .tips-section ul {
-            padding-left: 20px;
-            color: #666;
-        }
-
-        .expense-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
-        }
-
-        .expense-name {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .expense-value {
-            margin-right: 10px;
-        }
-
-        .expense-delete-button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-        }
-
-        .expense-delete-button i {
-            color: #f44336;
-        }
-        #pdf-quality-options {
-    position: relative;
-    display: inline-block;
-}
-
-#pdf-quality-options ul {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    white-space: nowrap;
-    z-index: 1;
-    display: none;
-}
-
-#pdf-quality-header {
-    padding: 10px;
-    font-weight: bold;
-    border-bottom: 1px solid #ccc;
-}
-
-.pdf-quality-option {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.pdf-quality-option:hover {
-    background-color: #ddd;
-}
-
-.options-hidden {
-    visibility: hidden;
-}
-.options-hidden {
-    list-style-type: none;
-}
-.pdf-button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: #ffffff;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-    }
-
-    .pdf-button:hover {
-        background-color: #45a049;
-    }
-    .button-expense:hover{
-        background-color: #45a049;
-    }
-    .pdf-quality-options {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    </style>
+    
 </head>
 <body>
     <div id="content">
+        <div class="theme-container shadow-dark">
+            <img id="theme-icon"    src="https://www.uplooder.net/img/image/2/addf703a24a12d030968858e0879b11e/moon.svg" alt="ERR">
+          </div>
+          
         <h1>Minhas Despesas</h1>
-
+          
         <div>
             <label for="salary">Salário total:</label>
             <input type="number" id="salary" step="any" placeholder="Digite o salário total">
         </div>
 
         <h2>Despesas</h2>
+
         <div id="expense-list">
             <ul></ul>
         </div>
@@ -230,16 +72,14 @@
                 <li>Busque orientação financeira profissional.</li>
             </ul>
         </div>
-    </div>
-
-<button id="share-pdf-button" class="pdf-button"><i class="fas fa-share"></i> Compartilhe seu orçamento</button>
-
-<ul id="pdf-quality-options" class="pdf-quality-options options-hidden">
+        <button id="share-pdf-button" class="pdf-button"><i class="fas fa-share-alt"></i> Compartilhe seu orçamento</button>
+        <ul id="pdf-quality-options" class="pdf-quality-options options-hidden">
     <li id="pdf-quality-header">Qual qualidade você gostaria?</li>
     <li class="pdf-quality-option">Alta</li>
     <li class="pdf-quality-option">Média</li>
     <li class="pdf-quality-option">Baixa</li>
 </ul>
+    </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
 <script>
@@ -282,7 +122,8 @@
         }
     });
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
 <script src="main.js"></script>
+<script src="dark.js"></script>
 </body>
 </html>

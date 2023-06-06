@@ -125,39 +125,80 @@ var expenses = [];
     }
 
     function formatCurrency(value) {
-        return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    }
+        if (!value) {
+          return 'R$ 0,00';
+        }
+        return 'R$ ' + value.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      }
 
-    function createExpenseItem(expense) {
+      function createExpenseItem(expense) {
         var listItem = document.createElement('li');
         listItem.className = 'expense-item';
-
+      
         var expenseName = document.createElement('span');
         expenseName.className = 'expense-name';
         expenseName.textContent = expense.name;
+        expenseName.setAttribute('contenteditable', 'true');
+        expenseName.addEventListener('input', function() {
+          var editedName = expenseName.textContent.trim();
+          if (editedName !== '') {
+            expense.name = editedName;
+            updateChart();
+          }
+        });
+        expenseName.addEventListener('focusout', function() {
+          var editedName = expenseName.textContent.trim();
+          if (editedName === '') {
+            expenseName.textContent = expense.name;
+          } else {
+            expense.name = editedName;
+            expenseName.textContent = editedName;
+            updateChart();
+          }
+        });
         listItem.appendChild(expenseName);
-
+      
         var expenseValue = document.createElement('span');
         expenseValue.className = 'expense-value';
         expenseValue.textContent = formatCurrency(expense.value);
+        expenseValue.setAttribute('contenteditable', 'true');
+        expenseValue.addEventListener('input', function() {
+          var editedValue = expenseValue.textContent.replace(/[^0-9,]/g, '');
+          var decimalCount = editedValue.split(',')[1];
+          if (decimalCount && decimalCount.length > 2) {
+            editedValue = editedValue.slice(0, editedValue.lastIndexOf(',') + 3);
+          }
+          expenseValue.textContent = editedValue !== '' ? formatCurrency(parseFloat(editedValue.replace(',', '.'))) : ''; // Ajuste aqui
+          if (editedValue !== '') {
+            expense.value = parseFloat(editedValue.replace(',', '.'));
+            updateChart();
+          }
+        });
+        expenseValue.addEventListener('focusout', function() {
+          var editedValue = expenseValue.textContent.replace(/[^0-9,]/g, '');
+          if (editedValue === '') {
+            expenseValue.textContent = formatCurrency(expense.value); // Restaura o valor anterior
+          }
+        });
         listItem.appendChild(expenseValue);
-
+      
         var deleteButton = document.createElement('button');
         deleteButton.className = 'expense-delete-button';
         deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
         deleteButton.addEventListener('click', function() {
-            expenses = expenses.filter(function(item) {
-                return item !== expense;
-            });
-            listItem.remove();
-            updateChart();
-            updateStatus();
+          expenses = expenses.filter(function(item) {
+            return item !== expense;
+          });
+          listItem.remove();
+          updateChart();
+          updateStatus();
         });
         listItem.appendChild(deleteButton);
-
+      
         return listItem;
-    }
-
+      }
+      
+      
     function addExpense() {
         var expenseName = document.getElementById('expense-name').value;
         var expenseValue = parseFloat(document.getElementById('expense-value').value);
@@ -208,3 +249,4 @@ var expenses = [];
         updateChart();
         updateStatus();
     });
+    
