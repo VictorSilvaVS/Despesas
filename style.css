@@ -30,11 +30,14 @@
         textarea {
             width: 98%;
             padding: 10px;
+            
             border: 1px solid #ccc;
             border-radius: 4px;
             resize: vertical;
         }
-
+       .despesa{
+            margin-top: 10px;
+       }
         #chart-section {
             margin-top: 20px;
             text-align: center;
@@ -92,69 +95,69 @@
             color: #f44336;
         }
         #pdf-quality-options {
-    position: relative;
-    display: inline-block;
+            position: relative;
+            display: inline-block;
 }
 
-#pdf-quality-options ul {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    white-space: nowrap;
-    z-index: 1;
-    display: none;
-}
+        #pdf-quality-options ul {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+            z-index: 1;
+            display: none;
+        }
 
-#pdf-quality-header {
-    padding: 10px;
-    font-weight: bold;
-    border-bottom: 1px solid #ccc;
-}
+        #pdf-quality-header {
+            padding: 10px;
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+        }
 
-.pdf-quality-option {
-    padding: 10px;
-    cursor: pointer;
-}
+        .pdf-quality-option {
+            padding: 10px;
+            cursor: pointer;
+        }
 
-.pdf-quality-option:hover {
-    background-color: #ddd;
-}
+        .pdf-quality-option:hover {
+            background-color: #ddd;
+        }
 
-.options-hidden {
-    visibility: hidden;
-}
-.options-hidden {
-    list-style-type: none;
-}
-.pdf-button,
-.button-expense {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: #ffffff;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-    }
-    .button-expense {
-        margin: 5px;
-    }
+        .options-hidden {
+            visibility: hidden;
+        }
+        .options-hidden {
+            list-style-type: none;
+        }
+        .pdf-button,
+        .button-expense {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: #ffffff;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+                border-radius: 4px;
+                transition: background-color 0.3s ease;
+            }
+            .button-expense {
+                margin: 5px;
+            }
 
-    .pdf-button:hover {
-        background-color: #45a049;
-    }
-    .button-expense:hover{
-        background-color: #45a049;
-    }
-    .pdf-quality-options {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    } 
+            .pdf-button:hover {
+                background-color: #45a049;
+            }
+            .button-expense:hover{
+                background-color: #45a049;
+            }
+            .pdf-quality-options {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            } 

@@ -1,29 +1,37 @@
-
 :root.dark-mode {
   --bs-dark: linear-gradient(318.32deg, #c3d1e4 0%, #dde7f3 55%, #d4e0ed 100%);
 }
-:root.dark-mode {
-  --bs-dark: linear-gradient(318.32deg, #c3d1e4 0%, #dde7f3 55%, #d4e0ed 100%);
+:root.dark-mode .container {
+  background: linear-gradient(165deg, rgb(21, 21, 21) 0%, rgb(31, 31, 31) 40%, rgba(68, 68, 68, 1) 98%, rgb(29, 29, 29) 100%);
+}
+:root.dark-mode .loader:before {
+  box-shadow: 
+    0 -10px 20px 20px #b3b0b040 inset,
+    0 -5px 15px 10px #a6a4a450 inset,
+    0 -2px 5px #b7b5b580 inset,
+    0 -3px 2px #b8b6b6bb inset,
+    0 2px 0px #7d7c7c,
+    0 2px 3px rgb(175, 175, 175),
+    0 5px 5px #72727290,
+    0 10px 15px #67676760,
+    0 10px 20px 20px #67666640;
+}
+.dark-mode .loading-overlay {
+  background-color: #1e2125; /* Cor de fundo branco para o dark mode */
 }
 
-.dark-mode .theme-container {
-  background: linear-gradient(145deg, #23282c, #1e2125);
-  box-shadow: 17px 17px 23px #1a1d20, -17px -17px 23px #282d32, inset 5px 5px 4px #1e2226, inset -5px -5px 4px #24282c;
-}
-
-.dark-mode .shadow-light {
-  box-shadow: 7px 7px 15px -10px #bbcfda, -4px -4px 13px #ffffff, inset 7px 7px 3px rgba(209, 217, 230, 0.35), inset -11px -11px 3px rgba(255, 255, 255, 0.3);
-}
 .dark-mode #content {
   background-color: #2d3235;
   color: #ffffff;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
 }
+
 .dark-mode body {
   background-color: #23282c;
   color: #ffffff;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
 }
+
 .dark-mode #content h1 {
   color: #ffffff;
 }
@@ -47,27 +55,34 @@
   background-color: #1e2125;
   color: #ffffff;
 }
-.dark-mode #content  .pdf-button{
+
+.dark-mode #content .pdf-button {
   background-color: #1e2125;
   color: #ffffff;
 }
+
 .dark-mode #content .pdf-button:hover {
   background-color: #ffffff;
   color: #1e2125;
 }
+
 .dark-mode #content .button-expense:hover {
   background-color: #ffffff;
   color: #1e2125;
 }
+
 .dark-mode .tips-section h3 {
   color: #fff; /* Defina a cor do título (h3) para o modo escuro */
 }
+
 .expense-name.dark-mode {
   color: #ffffff; /* cor branca */
 }
+
 .dark-mode .tips-section li {
   color: #ccc; /* Defina a cor dos itens de lista (li) para o modo escuro */
 }
+
 .dark-mode #content #chart-container {
   background-color: #1e2125;
   border-color: #ffffff;
@@ -76,10 +91,11 @@
 .dark-mode #content #chart-container canvas {
   background-color: #2d3235;
 }
+
 .dark-mode #content .tips-section {
   background-color: #35383a;
-  
 }
+
 .theme-container {
   width: 70px;
   height: 70px;
@@ -92,31 +108,28 @@
   align-items: center;
   transition: 0.5s;
 }
+
 .valor-despesa {
   color: #ff0000; /* Substitua pelo código da cor desejada */
 }
+
 .theme-container:hover {
   opacity: 0.8;
 }
 
 .shadow-dark {
   background: linear-gradient(145deg, #23282c, #1e2125);
-  box-shadow: 17px 17px 23px #1a1d20,
-    -17px -17px 23px #282d32, inset 5px 5px 4px #1e2226,
-    inset -5px -5px 4px #24282c;
+  box-shadow: 17px 17px 23px #1a1d20, -17px -17px 23px #282d32, inset 5px 5px 4px #1e2226, inset -5px -5px 4px #24282c;
 }
 
 .shadow-light {
-  box-shadow: 7px 7px 15px -10px #bbcfda, -4px -4px 13px #ffffff,
-    inset 7px 7px 3px rgba(209, 217, 230, 0.35),
-    inset -11px -11px 3px rgba(255, 255, 255, 0.3)
+  box-shadow: 7px 7px 15px -10px #bbcfda, -4px -4px 13px #ffffff, inset 7px 7px 3px rgba(209, 217, 230, 0.35), inset -11px -11px 3px rgba(255, 255, 255, 0.3);
 }
 
 @keyframes change {
   0% {
     transform: scale(1);
   }
-
   100% {
     transform: scale(1.4);
   }

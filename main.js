@@ -1,3 +1,19 @@
+// Para exibir a tela de loading
+function showLoadingScreen() {
+    const loadingScreen = document.getElementById("loading-screen");
+    loadingScreen.style.display = "block";
+  }
+  
+  // Para ocultar a tela de loading
+  function hideLoadingScreen() {
+    const loadingScreen = document.getElementById("loading-screen");
+    loadingScreen.style.display = "none";
+  }
+  // Simule um atraso de 3 segundos para ilustrar o carregamento
+  setTimeout(function() {
+    // Carregamento concluído
+    hideLoadingScreen();
+  }, 1500);
 var expenses = [];
     var myChart;
 

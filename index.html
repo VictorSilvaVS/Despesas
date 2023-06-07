@@ -15,12 +15,19 @@
     <meta property="og:url" content="">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dark.css">
+    <link rel="stylesheet" href="loading.css">
     <title>Despesas - Gráfico de Pizza</title>
 
 
     
 </head>
 <body>
+    <div id="loading-screen">
+        <div class="loading-overlay"></div>
+        <div class="container">
+          <div class="loader"></div>
+        </div>
+      </div>
     <div id="content">
         <div class="theme-container shadow-dark">
             <img id="theme-icon"    src="https://www.uplooder.net/img/image/2/addf703a24a12d030968858e0879b11e/moon.svg" alt="ERR">
@@ -40,8 +47,8 @@
         </div>
 
         <div class="input-group">
-            <input type="text" id="expense-name" placeholder="Nome da despesa">
-            <input type="number" id="expense-value" placeholder="Valor da despesa">
+            <input class="despesa" type="text" id="expense-name" placeholder="Nome da despesa">
+            <input class="despesa" type="number" id="expense-value" placeholder="Valor da despesa">
             <button class="button-expense"id="add-expense-button"><i class="fas fa-plus"></i> Adicionar</button>
         </div>
 
