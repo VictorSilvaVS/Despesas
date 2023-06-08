@@ -21,7 +21,7 @@ var myChart;
 
 function updateChart() {
   var salary = parseFloat(document.getElementById('salary').value);
-
+  localStorage.setItem('expenses', JSON.stringify(expenses));
   var data = [];
   var totalExpenses = 0;
   for (var i = 0; i < expenses.length; i++) {
@@ -122,6 +122,7 @@ function updateSummary() {
 
   document.getElementById('total-expenses').textContent = formatCurrency(totalExpenses);
   document.getElementById('total-salary').textContent = formatCurrency(salary);
+  localStorage.setItem('salary', salary);
 
   updateStatus();
 }
