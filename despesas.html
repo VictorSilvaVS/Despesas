@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="ico.ico" type="image/x-icon">
+    <meta property="og:title" content="Gerenciador de despesas">
+    <meta property="og:description" content="Analise suas despesas">
+    <meta property="og:image" content="https://www.etecjk.com/wp-content/uploads/2013/08/gnucash-icon-256x256.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta property="og:url" content="">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
+    <title>Despesas - Gráfico de Pizza</title>
+</head>
+<body>
+    <div id="content">
+        <h1>Minhas Despesas</h1>
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="Pesquisar despesas...">
+            <button id="search-button"><i class="fas fa-search"></i></button>
+        </div>
+        <div id="expense-list">
+            <!-- Lista de despesas será gerada dinamicamente -->
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/moment/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
+    <script>// Função para formatar a data no formato "dd/mm/aaaa"
+        function formatDate(date) {
+          return moment(date).format("DD/MM/YYYY");
+        }
+        
+        // Função para exibir as despesas no site
+        function renderExpenses(expenses) {
+          // Limpa a lista de despesas
+          expenseList.innerHTML = "";
+        
+          // Filtra as despesas com base no termo de pesquisa
+          const searchTerm = searchInput.value.toLowerCase();
+          const filteredExpenses = expenses.filter((expense) =>
+            expense.name.toLowerCase().includes(searchTerm)
+          );
+        
+          // Cria um elemento <ul> para exibir as despesas
+          const ulElement = document.createElement("ul");
+        
+          // Adiciona cada despesa como um item de lista
+          filteredExpenses.forEach((expense) => {
+            const liElement = document.createElement("li");
+            const formattedDate = formatDate(expense.date);
+            liElement.textContent = `${expense.name}: R$ ${expense.value.toFixed(
+              2
+            )} (Data: ${formattedDate})`;
+            ulElement.appendChild(liElement);
+          });
+        
+          // Adiciona a lista de despesas ao elemento expenseList
+          expenseList.appendChild(ulElement);
+        }
+        </script>
+    <script>
+        // Obtém elementos do DOM
+        const searchInput = document.getElementById("search-input");
+        const searchButton = document.getElementById("search-button");
+        const expenseList = document.getElementById("expense-list");
+
+        // Função para exibir as despesas no site
+        function renderExpenses(expenses) {
+            // Limpa a lista de despesas
+            expenseList.innerHTML = "";
+
+            // Filtra as despesas com base no termo de pesquisa
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredExpenses = expenses.filter(expense => expense.name.toLowerCase().includes(searchTerm));
+
+            // Cria um elemento <ul> para exibir as despesas
+            const ulElement = document.createElement("ul");
+
+            // Adiciona cada despesa como um item de lista
+            filteredExpenses.forEach(expense => {
+                const liElement = document.createElement("li");
+                const expenseDate = new Date(expense.date);
+                const formattedDate = `${expenseDate.getDate()}/${expenseDate.getMonth() + 1}/${expenseDate.getFullYear()}`;
+                liElement.textContent = `${expense.name}: R$ ${expense.value.toFixed(2)} (Data: ${formattedDate})`;
+                ulElement.appendChild(liElement);
+            });
+
+            // Adiciona a lista de despesas ao elemento expenseList
+            expenseList.appendChild(ulElement);
+        }
+
+        // Obtém as despesas armazenadas no localStorage
+        function getExpensesFromLocalStorage() {
+            const expensesJson = localStorage.getItem("expenses");
+            return JSON.parse(expensesJson) || [];
+        }
+
+        // Event listeners para pesquisar despesas
+        searchButton.addEventListener("click", () => {
+            const expenses = getExpensesFromLocalStorage();
+            renderExpenses(expenses);
+        });
+
+        searchInput.addEventListener("keyup", () => {
+            const expenses = getExpensesFromLocalStorage();
+            renderExpenses(expenses);
+        });
+
+        // Exibe as despesas iniciais
+        const initialExpenses = getExpensesFromLocalStorage();
+        renderExpenses(initialExpenses);
+    </script>
+</body>
+</html>

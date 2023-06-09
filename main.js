@@ -1,20 +1,3 @@
-// Para exibir a tela de loading
-function showLoadingScreen() {
-  const loadingScreen = document.getElementById("loading-screen");
-  loadingScreen.style.display = "block";
-}
-
-// Para ocultar a tela de loading
-function hideLoadingScreen() {
-  const loadingScreen = document.getElementById("loading-screen");
-  loadingScreen.style.display = "none";
-}
-
-// Simule um atraso de 3 segundos para ilustrar o carregamento
-setTimeout(function() {
-  // Carregamento concluído
-  hideLoadingScreen();
-}, 1500);
 
 var expenses = [];
 var myChart;
@@ -73,8 +56,108 @@ function updateChart() {
             '#7CD9FF',
             '#FFC400',
             '#80CBC4',
-            '#f70505'
-          ]
+            '#f70505',
+            '#5d8aa8',
+            '#FF00FF',
+            '#00FF00',
+            '#FFFF00',
+            '#00FFFF',
+            '#0000FF',
+            '#FF0000',
+            '#800080',
+            '#8A2BE2',
+            '#FF1493',
+            '#1E90FF',
+            '#FFD700',
+            '#32CD32',
+            '#FF4500',
+            '#B8860B',
+            '#808000',
+            '#800000',
+            '#008080',
+            '#008000',
+            '#CD5C5C',
+            '#DB7093',
+            '#ADFF2F',
+            '#FF69B4',
+            '#FFA500',
+            '#00BFFF',
+            '#7FFFD4',
+            '#BC8F8F',
+            '#FF6347',
+            '#00FA9A',
+            '#FF00FF',
+            '#FF0000',
+            '#CD853F',
+            '#FFB6C1',
+            '#A0522D',
+            '#FFFACD',
+            '#8B4513',
+            '#556B2F',
+            '#FFDAB9',
+            '#DAA520',
+            '#6A5ACD',
+            '#2E8B57',
+            '#FF4500',
+            '#808080',
+            '#BDB76B',
+            '#FFA07A',
+            '#7B68EE',
+            '#00FF7F',
+            '#00CED1',
+            '#9932CC',
+            '#FF8C00',
+            '#A52A2A',
+            '#DEB887',
+            '#4682B4',
+            '#FF69B4',
+            '#8B008B',
+            '#800000',
+            '#808000',
+            '#008000',
+            '#008080',
+            '#000080',
+            '#800080',
+            '#FF0000',
+            '#FF4500',
+            '#FF8C00',
+            '#FFA500',
+            '#FFD700',
+            '#FFFF00',
+            '#ADFF2F',
+            '#008000',
+            '#006400',
+            '#008080',
+            '#0000FF',
+            '#000080',
+            '#4B0082',
+            '#8B008B',
+            '#800080',
+            '#FF00FF',
+            '#FF1493',
+            '#FF69B4',
+            '#FFB6C1',
+            '#FFC0CB',
+            '#FAEBD7',
+            '#F5F5DC',
+            '#FFE4C4',
+            '#FFEBCD',
+            '#F5DEB3',
+            '#FFF8DC',
+            '#FFFACD',
+            '#FAFAD2',
+            '#FFFFE0',
+            '#FFFACD',
+            '#FFEFD5',
+            '#FFE4B5',
+            '#FFDAB9',
+            '#FFE4E1',
+            '#FFF0F5',
+            '#FFF5EE',
+            '#FDF5E6',
+            '#FFFAF0',
+            '#FFFFF0'
+            ]
         }]
       },
       options: {
@@ -210,6 +293,12 @@ function createExpenseItem(expense) {
   });
   listItem.appendChild(expenseValue);
 
+  var creationDate = document.createElement('span');
+  creationDate.className = 'expense-creation-date';
+  var formattedDate = new Date(expense.creationDate).toLocaleDateString('pt-BR');
+  creationDate.textContent = formattedDate;
+  listItem.appendChild(creationDate);
+
   var deleteButton = document.createElement('button');
   deleteButton.className = 'expense-delete-button';
   deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
@@ -226,6 +315,7 @@ function createExpenseItem(expense) {
   return listItem;
 }
 
+
 function addExpense() {
   var expenseName = document.getElementById('expense-name').value;
   var expenseValue = parseFloat(document.getElementById('expense-value').value);
@@ -235,7 +325,8 @@ function addExpense() {
 
   var expense = {
     name: expenseName,
-    value: expenseValue
+    value: expenseValue,
+    creationDate: new Date().toISOString() // Adicione esta linha para definir a data de criação
   };
 
   expenses.push(expense);
