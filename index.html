@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta property="og:url" content="">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dark.css">
     <link rel="stylesheet" href="mobile.css">
@@ -164,8 +165,128 @@
             document.body.removeChild(link);
         });
     </script>
-    
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Verifica se é a primeira vez que o usuário acessa o site
+      if (!localStorage.getItem('primeiraVez')) {
+        // Exibe o pop-up com a pergunta do tutorial
+        Swal.fire({
+          title: 'Bem-vindo!',
+          text: 'Este é um tutorial para ajudá-lo a se familiarizar com as funcionalidades do nosso site.',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Sim, mostrar tutorial',
+          cancelButtonText: 'Não, obrigado'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Chama a função para exibir o tutorial
+            showTutorial();
+          }
+        });
+  
+        // Marca que o usuário já acessou o site
+        localStorage.setItem('primeiraVez', 'true');
+      }
+    });
+  
+    function showTutorial() {
+      // Define as etapas do tutorial
+      const tutorialSteps = [
+        {
+          title: 'Bem-vindo!',
+          html: 'Este é um tutorial para ajudá-lo a se familiarizar com as funcionalidades do nosso site. Aqui, você não precisa se preocupar com matemática chata, pois o gráfico é criado automaticamente, exibindo em tempo real quanto você economiza e o custo de cada despesa em relação ao seu salário.',
+          showCancelButton: false,
+          showConfirmButton: false,
+          footer: '<button id="next-button" class="swal2-confirm swal2-styled" style="display: inline-block;">Próximo</button>'
+        },
+        {
+          title: 'Sálario na fronteira',
+          html: 'O primeiro campo, é o sálario, você só digita a sua renda mensal e pronto, rápido e fácil!',
+          showCancelButton: false,
+          showConfirmButton: false,
+          footer: '<button id="next-button" class="swal2-confirm swal2-styled" style="display: inline-block;">Próximo</button>'
+        },
+        {
+          title: 'Escolha Automática da Moeda',
+          html: 'Nosso site irá selecionar automaticamente a moeda correta com base na sua localização. Assim, você não precisa se preocupar em configurar a moeda manualmente.',
+          showCancelButton: false,
+          showConfirmButton: false,
+          footer: '<button id="next-button" class="swal2-confirm swal2-styled" style="display: inline-block;">Próximo</button>'
+        },
+        {
+          title: 'Adicionando Despesas',
+          html: 'Agora, vamos aprender como adicionar despesas ao nosso site. Ao inserir o salário, você terá um campo logo abaixo para digitar o nome da despesa. É fácil e rápido!',
+          showCancelButton: false,
+          showConfirmButton: false,
+          footer: '<button id="next-button" class="swal2-confirm swal2-styled" style="display: inline-block;">Próximo</button>'
+        },
+        {
+          title: 'Custo da Despesa',
+          html: 'Informe o valor da despesa no campo de custo. Nosso site irá calcular e gerenciar seus gastos automaticamente, fornecendo informações atualizadas em tempo real sobre o quanto cada despesa está custando em relação ao seu salário.',
+          showCancelButton: false,
+          showConfirmButton: false,
+          footer: '<button id="next-button" class="swal2-confirm swal2-styled" style="display: inline-block;">Próximo</button>'
+        },
+        {
+          title: 'Análise Financeira',
+          html: 'Após adicionar suas despesas, você poderá gerar um gráfico completo de análise financeira. Fique atento às mensagens em verde ou vermelho, indicando se você está ou não em dívidas fora do seu orçamento inicial.',
+          showCancelButton: false,
+          showConfirmButton: false,
+          footer: '<button id="next-button" class="swal2-confirm swal2-styled" style="display: inline-block;">Próximo</button>'
+        },
+        {
+          title: 'Relatório Completo',
+          html: 'Além do gráfico, você também pode gerar um relatório completo em PDF ou planilha, que fornecerá informações detalhadas sobre suas despesas, ajudando você a melhor gerenciar suas finanças.',
+          showCancelButton: false,
+          showConfirmButton: false,
+          footer: '<button id="next-button" class="swal2-confirm swal2-styled" style="display: inline-block;">Próximo</button>'
+        },
+        {
+          title: 'MODO ESCURO 👻',
+          html: 'Descubra o Dark Mode, 😎🌙 uma funcionalidade incrível que economiza bateria ⚡️, reduz o cansaço visual 😴, e deixa o site com um estilo super descolado! Experimente agora e mergulhe na escuridão! 🦇✨',
+          showCancelButton: false,
+          showConfirmButton: false,
+          footer: '<button id="next-button" class="swal2-confirm swal2-styled" style="display: inline-block;">Próximo</button>'
+        },
+        {
+          title: 'Tutorial Concluído! ❤',
+          html: 'Você concluiu o tutorial. Obrigado por ler e esperamos que você aproveite ao máximo o nosso site!',
+          showCancelButton: false,
+          showConfirmButton: true,
+          confirmButtonText: 'Fechar'
+        }
+      ];
+  
+      let currentStepIndex = 0;
+  
+      // Função para exibir a próxima etapa do tutorial
+      function showNextStep() {
+        const currentStep = tutorialSteps[currentStepIndex];
+  
+        Swal.fire(currentStep).then((result) => {
+          if (result.isConfirmed && currentStepIndex < tutorialSteps.length - 1) {
+            currentStepIndex++;
+            showNextStep();
+          }
+        });
+      }
+  
+      // Adiciona o evento de clique ao botão "Próximo"
+      document.addEventListener('click', function(e) {
+        if (e.target && e.target.id == 'next-button') {
+          currentStepIndex++;
+          showNextStep();
+        }
+      });
+  
+      // Exibe a primeira etapa do tutorial
+      showNextStep();
+    }
+  </script>
+  
     </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>    
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
